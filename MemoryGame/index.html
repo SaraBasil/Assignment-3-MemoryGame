@@ -2,30 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mobile App Prototype</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Memory Match Mania</title>
   <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Home screen -->
-  <div id="home-screen" class="screen">
-    <h1>Welcome</h1>
-    <button onclick="navigateTo('screen2')">Start</button>
+
+<!-- DARK MODE TOGGLE -->
+<button id="darkToggle" class="dark-toggle" title="Toggle Dark Mode">🌙</button>
+
+<!-- LOGIN MODAL -->
+<div id="login-modal" class="screen">
+  <h2>🧠 Welcome to Memory Match Mania</h2>
+  <p>Please enter your name to start</p>
+  <input type="text" id="username" placeholder="Enter your name" />
+  <br><br>
+  <button onclick="saveUser()">Continue</button>
+</div>
+
+<!-- START SCREEN -->
+<div id="start-screen" class="screen hidden">
+  <h1>🧠 Memory Match Mania 🎯</h1>
+  <p>Welcome, <span id="player-name"></span>!</p>
+  <p>Match all cards with fewer moves to earn a high score!</p>
+
+  <img src="assets/logo.png" alt="Game Logo" width="150" />
+
+  <div class="controls">
+    <label for="theme">🎨 Theme:</label>
+    <select id="theme">
+      <option value="desserts">🍰 Desserts</option>
+      <option value="animals">🐶 Animals</option>
+      <option value="famous">🏛️ Famous Buildings</option>
+    </select>
+
+    <label for="level">⚙️ Difficulty:</label>
+    <select id="level">
+      <option value="easy">🟢 Easy (4 pairs)</option>
+      <option value="medium">🟡 Medium (6 pairs)</option>
+      <option value="hard">🔴 Hard (8 pairs)</option>
+    </select>
   </div>
 
-  <!-- Screen 2 -->
-  <div id="screen2" class="screen hidden">
-    <h2>Profile</h2>
-    <input type="text" placeholder="Your name" />
-    <button onclick="navigateTo('screen3')">Next</button>
-  </div>
+  <p>🏆 Best Score: <span id="best-score">0</span></p>
 
-  <!-- Screen 3 -->
-  <div id="screen3" class="screen hidden">
-    <h2>Confirm Details</h2>
-    <button onclick="navigateTo('home-screen')">Back to Home</button>
+  <div class="leaderboard">
+  <h3>🏆 Leaderboard</h3>
+  <div class="leaderboard-table">
+    <div class="leader-row header">
+      <span>Rank</span>
+      <span>Name</span>
+      <span>Score</span>
+    </div>
+    <div class="leader-row">
+      <span>🥇</span>
+      <span>Sara</span>
+      <span>90</span>
+    </div>
+    <div class="leader-row">
+      <span>🥈</span>
+      <span>Jason</span>
+      <span>80</span>
+    </div>
+    <div class="leader-row">
+      <span>🥉</span>
+      <span>Alex</span>
+      <span>75</span>
+    </div>
   </div>
+</div>
 
-  <script src="script.js"></script>
+
+  <button onclick="startGame()">🎮 Start Game</button>
+</div>
+
+<!-- GAME SCREEN -->
+<div id="game-screen" class="screen hidden">
+  <h2>Match the cards!</h2>
+  <div class="stats">
+    <p>Score: <span id="score">0</span> | Moves: <span id="moves">0</span> | Time: <span id="time">0s</span> | Progress: <span id="progress">0%</span></p>
+  </div>
+  <div id="game-board" class="board"></div>
+</div>
+
+<!-- END SCREEN -->
+<div id="end-screen" class="screen hidden">
+  <h2 id="end-message"></h2>
+  <button onclick="restartGame()">🔁 Play Again</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
